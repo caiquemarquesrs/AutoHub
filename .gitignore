@@ -1,5 +1,7 @@
 node_modules/
 backend/database.sqlite
+backend/database.sqlite-shm
+backend/database.sqlite-wal
 backend/uploads/*
 !backend/uploads/.gitkeep
 backend/.env

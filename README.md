@@ -32,14 +32,42 @@ cd autohub
 # 2. Instalar dependências
 npm install
 
-# 3. Popular o banco de dados com dados de exemplo
+# 3. Configurar variáveis de ambiente
+# (copie backend/.env.example para backend/.env)
+
+# 4. Popular o banco de dados com dados de exemplo
 npm run seed
 
-# 4. Iniciar o servidor
+# 5. Iniciar o servidor
 npm start
 ```
 
 O sistema estará disponível em **http://localhost:3000**
+
+## Configuração do `.env`
+
+Crie o arquivo `backend/.env` com base no `backend/.env.example`:
+
+```env
+PORT=3000
+JWT_SECRET=your-secret-key-here
+JWT_EXPIRATION=24h
+DB_PATH=./database.sqlite
+```
+
+## Execução Rápida (critério da disciplina)
+
+Após instalar as dependências, a aplicação inicia com um único comando:
+
+```bash
+npm start
+```
+
+Comando completo recomendado para primeira execução:
+
+```bash
+npm install && npm run seed && npm start
+```
 
 ## Scripts Disponíveis
 

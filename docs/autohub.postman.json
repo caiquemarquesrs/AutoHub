@@ -40,7 +40,18 @@
 						},
 						"description": "Cria um novo usuário com perfil 'user'."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "201 - Usuário registrado",
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Conta criada com sucesso\",\n  \"data\": {\n    \"id\": 6,\n    \"name\": \"Teste Postman\",\n    \"email\": \"teste@postman.com\",\n    \"role\": \"user\",\n    \"phone\": \"(11) 99999-9999\",\n    \"cpf_cnpj\": \"123.456.789-00\",\n    \"created_at\": \"2026-03-31 18:10:00\"\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Login (admin)",
@@ -77,7 +88,18 @@
 						},
 						"description": "Login como admin. O token é salvo automaticamente na variável {{token}}."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Login admin",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Login realizado com sucesso\",\n  \"data\": {\n    \"token\": \"<JWT_TOKEN>\",\n    \"user\": {\n      \"id\": 1,\n      \"name\": \"Admin\",\n      \"email\": \"admin@autohub.com\",\n      \"role\": \"admin\"\n    }\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Login (user)",
@@ -114,7 +136,18 @@
 						},
 						"description": "Login como usuário comum. O token é salvo automaticamente na variável {{token}}."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Login usuário",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Login realizado com sucesso\",\n  \"data\": {\n    \"token\": \"<JWT_TOKEN>\",\n    \"user\": {\n      \"id\": 2,\n      \"name\": \"Maria Silva\",\n      \"email\": \"maria@email.com\",\n      \"role\": \"user\"\n    }\n  }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -133,7 +166,18 @@
 						},
 						"description": "Lista todas as peças. Aceita query params: ?search=filtro&category=1"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Lista de peças",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Disco de Freio\",\n      \"price\": 189.9,\n      \"category_id\": 2,\n      \"category_name\": \"Freios\",\n      \"description\": \"Disco de freio ventilado\",\n      \"image_url\": \"https://...\",\n      \"specifications\": [{ \"label\": \"Diâmetro\", \"value\": \"280 mm\" }],\n      \"compatible_cars\": [\"Volkswagen Gol (2008–2022)\"]\n    }\n  ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Listar peças (com filtro)",
@@ -157,7 +201,18 @@
 						},
 						"description": "Lista peças filtrando por nome e/ou categoria."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Lista filtrada",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Disco de Freio\",\n      \"price\": 189.9,\n      \"category_name\": \"Freios\"\n    }\n  ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Detalhe da peça",
@@ -171,7 +226,18 @@
 						},
 						"description": "Retorna os dados completos de uma peça pelo ID."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Detalhe da peça",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Disco de Freio\",\n    \"price\": 189.9,\n    \"category_id\": 2,\n    \"category_name\": \"Freios\",\n    \"description\": \"Disco de freio ventilado\",\n    \"image_url\": \"https://...\",\n    \"specifications\": [{ \"label\": \"Diâmetro\", \"value\": \"280 mm\" }],\n    \"compatible_cars\": [\"Volkswagen Gol (2008–2022)\"]\n  }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -190,7 +256,18 @@
 						},
 						"description": "Retorna todas as categorias de peças."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Lista de categorias",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": [\n    { \"id\": 1, \"name\": \"Motor\" },\n    { \"id\": 2, \"name\": \"Freios\" },\n    { \"id\": 3, \"name\": \"Suspensão\" }\n  ]\n}"
+						}
+					]
 				}
 			]
 		},
@@ -214,7 +291,18 @@
 						},
 						"description": "Lista todos os pedidos do usuário autenticado."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Meus pedidos",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"user_id\": 2,\n      \"status\": \"Processando\",\n      \"address\": \"Rua das Flores, 123 - São Paulo/SP\",\n      \"payment_method\": \"credit\",\n      \"installments\": 3,\n      \"subtotal\": 425.7,\n      \"shipping\": 0,\n      \"total\": 425.7,\n      \"created_at\": \"2026-03-31 18:20:00\",\n      \"items\": [\n        { \"part_id\": 1, \"part_name\": \"Disco de Freio\", \"quantity\": 2, \"unit_price\": 189.9 }\n      ]\n    }\n  ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Detalhe do meu pedido",
@@ -233,7 +321,18 @@
 						},
 						"description": "Retorna os detalhes de um pedido do usuário autenticado."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Detalhe do pedido (usuário)",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 1,\n    \"user_id\": 2,\n    \"customer_name\": \"Maria Silva\",\n    \"status\": \"Processando\",\n    \"address\": \"Rua das Flores, 123 - São Paulo/SP\",\n    \"payment_method\": \"credit\",\n    \"installments\": 3,\n    \"subtotal\": 425.7,\n    \"shipping\": 0,\n    \"total\": 425.7,\n    \"created_at\": \"2026-03-31 18:20:00\",\n    \"items\": [\n      { \"part_id\": 1, \"part_name\": \"Disco de Freio\", \"quantity\": 2, \"unit_price\": 189.9 }\n    ]\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Criar pedido",
@@ -260,7 +359,18 @@
 						},
 						"description": "Cria um novo pedido. Itens, endereço e pagamento são obrigatórios."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "201 - Pedido criado",
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Pedido criado com sucesso\",\n  \"data\": {\n    \"id\": 9,\n    \"user_id\": 2,\n    \"status\": \"Processando\",\n    \"address\": \"Rua das Flores, 123 - São Paulo/SP\",\n    \"payment_method\": \"credit\",\n    \"installments\": 3,\n    \"subtotal\": 569.7,\n    \"shipping\": 0,\n    \"total\": 569.7,\n    \"created_at\": \"2026-03-31 18:30:00\",\n    \"items\": [\n      { \"part_id\": 1, \"part_name\": \"Disco de Freio\", \"quantity\": 2, \"unit_price\": 189.9 },\n      { \"part_id\": 3, \"part_name\": \"Bateria 60Ah\", \"quantity\": 1, \"unit_price\": 189.9 }\n    ]\n  }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -284,7 +394,18 @@
 						},
 						"description": "KPIs: total de pedidos, pedidos por status, receita total, pedidos recentes."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Dashboard admin",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": {\n    \"totalOrders\": 8,\n    \"processingOrders\": 3,\n    \"shippedOrders\": 3,\n    \"deliveredOrders\": 2,\n    \"totalRevenue\": 4521.5,\n    \"recentOrders\": [\n      { \"id\": 8, \"customer_name\": \"Carlos Oliveira\", \"status\": \"Enviado\", \"total\": 809.8, \"created_at\": \"2026-03-30 10:20:00\" }\n    ]\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Listar todos os pedidos",
@@ -303,7 +424,18 @@
 						},
 						"description": "Lista todos os pedidos do sistema. Aceita ?search e ?status."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Todos os pedidos",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"customer_name\": \"Maria Silva\",\n      \"status\": \"Entregue\",\n      \"total\": 425.7,\n      \"created_at\": \"2026-03-29 14:00:00\",\n      \"items\": [\n        { \"part_id\": 1, \"part_name\": \"Disco de Freio\", \"quantity\": 2, \"unit_price\": 189.9 }\n      ]\n    }\n  ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Detalhe pedido (admin)",
@@ -322,7 +454,18 @@
 						},
 						"description": "Dados completos de qualquer pedido."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Detalhe pedido (admin)",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"data\": {\n    \"id\": 1,\n    \"customer_name\": \"Maria Silva\",\n    \"status\": \"Processando\",\n    \"address\": \"Rua das Flores, 123 - São Paulo/SP\",\n    \"payment_method\": \"credit\",\n    \"installments\": 3,\n    \"subtotal\": 425.7,\n    \"shipping\": 0,\n    \"total\": 425.7,\n    \"created_at\": \"2026-03-31 18:20:00\",\n    \"items\": [\n      { \"part_id\": 1, \"part_name\": \"Disco de Freio\", \"quantity\": 2, \"unit_price\": 189.9 }\n    ]\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Atualizar status do pedido",
@@ -349,7 +492,18 @@
 						},
 						"description": "Atualiza status: Processando → Enviado → Entregue (sequencial, sem voltar)."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Status atualizado",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Status atualizado com sucesso\",\n  \"data\": {\n    \"id\": 1,\n    \"status\": \"Enviado\",\n    \"updated_at\": \"2026-03-31 18:40:00\"\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Cadastrar peça",
@@ -409,7 +563,18 @@
 						},
 						"description": "Cria uma nova peça. Enviar como form-data para suportar upload de imagem."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "201 - Peça cadastrada",
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Peça cadastrada com sucesso\",\n  \"data\": {\n    \"id\": 11,\n    \"name\": \"Filtro de Ar Esportivo\",\n    \"price\": 189.9,\n    \"category_id\": 1,\n    \"description\": \"Filtro de ar de alto fluxo para melhor desempenho do motor.\",\n    \"image_url\": \"/uploads/1711900000000-filtro.jpg\",\n    \"specifications\": [\"Tipo: Cônico\", \"Material: Algodão\", \"Lavável: Sim\"],\n    \"compatible_cars\": [\"Honda Civic 2018-2024\", \"Honda Accord 2020-2024\"]\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Atualizar peça",
@@ -469,7 +634,18 @@
 						},
 						"description": "Atualiza uma peça existente. Enviar como form-data."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Peça atualizada",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Peça atualizada com sucesso\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Filtro de Ar Esportivo K&N\",\n    \"price\": 219.9,\n    \"category_id\": 1,\n    \"description\": \"Filtro de ar esportivo K&N de alto desempenho.\",\n    \"image_url\": \"/uploads/1711900010000-filtro-kn.jpg\",\n    \"specifications\": [\"Tipo: Cônico\", \"Material: Algodão\", \"Lavável: Sim\", \"Marca: K&N\"],\n    \"compatible_cars\": [\"Honda Civic 2018-2024\", \"Honda Accord 2020-2024\", \"Toyota Corolla 2020-2024\"]\n  }\n}"
+						}
+					]
 				},
 				{
 					"name": "Remover peça",
@@ -488,7 +664,18 @@
 						},
 						"description": "Remove uma peça pelo ID."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "200 - Peça removida",
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{ "key": "Content-Type", "value": "application/json" }
+							],
+							"body": "{\n  \"success\": true,\n  \"message\": \"Peça removida com sucesso\"\n}"
+						}
+					]
 				}
 			]
 		}

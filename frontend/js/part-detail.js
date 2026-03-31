@@ -61,10 +61,6 @@ function renderPart(part) {
             </div>
           `).join('')}
         </div>
-        <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
-          <span class="text-xs" style="color:#6C6C70">Frete grátis acima de R$ 300</span>
-          <span class="text-xs" style="color:#6C6C70">Garantia inclusa</span>
-        </div>
         <div style="display:flex;gap:12px;margin-top:auto">
           <button class="btn btn-outline-primary" style="flex:1" onclick="handleAdd()">Adicionar ao carrinho</button>
           <button class="btn btn-primary" style="flex:1" onclick="handleBuyNow()">Comprar agora</button>

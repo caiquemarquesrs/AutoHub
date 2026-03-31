@@ -5,6 +5,7 @@ const editId = urlParams.get('id');
 let editPart = null;
 let specs = [{ label: '', value: '' }];
 let imagePreview = null;
+let selectedImageFile = null;
 const categoryOptions = ['Motor', 'Freios', 'Suspensão', 'Elétrica', 'Rodas', 'Manutenção'];
 
 async function init() {
@@ -118,6 +119,7 @@ function removeSpec(idx) { specs.splice(idx, 1); if (specs.length === 0) specs.p
 function handleImageChange(input) {
   const file = input.files[0];
   if (!file) return;
+  selectedImageFile = file;
   const reader = new FileReader();
   reader.onload = (e) => {
     imagePreview = e.target.result;
@@ -156,9 +158,8 @@ async function handleSubmit(e) {
   formData.append('specifications', JSON.stringify(cleanSpecs));
   formData.append('compatible_cars', JSON.stringify(cleanCars));
 
-  const fileInput = document.getElementById('file-input');
-  if (fileInput.files[0]) {
-    formData.append('image', fileInput.files[0]);
+  if (selectedImageFile) {
+    formData.append('image', selectedImageFile);
   } else if (editPart && editPart.image_url) {
     formData.append('image_url', editPart.image_url);
   }

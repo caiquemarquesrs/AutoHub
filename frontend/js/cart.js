@@ -73,7 +73,7 @@ function renderCart() {
         <h1 class="page-title">Carrinho</h1>
         <p class="page-subtitle">${itemCount} ${itemCount === 1 ? 'item' : 'itens'} no carrinho</p>
       </div>
-      <button class="text-sm text-muted" style="display:flex;align-items:center;gap:6px" onclick="handleClearCart()">Limpar</button>
+      <button class="text-sm text-muted" style="display:flex;align-items:center;gap:6px" onclick="handleClearCart()">🗑️</button>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap">
       <div style="flex:1;min-width:300px">
