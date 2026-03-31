@@ -15,7 +15,7 @@ async function init() {
       editPart = res.data;
       specs = editPart.specifications && editPart.specifications.length > 0 ? editPart.specifications : [{ label: '', value: '' }];
       imagePreview = editPart.image_url;
-      document.title = 'AutoHub Admin - Editar Peça';
+      document.title = 'AutoHub';
     } catch {
       showToast('Peça não encontrada', 'error');
       window.location.href = '/pages/admin/parts-list.html';
@@ -42,7 +42,7 @@ function renderForm() {
             <label class="form-label mb-2">Imagem da Peça</label>
             <div id="image-upload" style="width:100%;aspect-ratio:1;border-radius:var(--radius-lg);border:2px dashed var(--color-border);background:var(--color-bg-alt);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;position:relative" onclick="document.getElementById('file-input').click()">
               ${imagePreview ? `<img src="${imagePreview}" style="width:100%;height:100%;object-fit:cover">` : `
-                <div style="font-size:32px;color:var(--color-text-placeholder);margin-bottom:12px">&#128247;</div>
+                <div style="font-size:20px;color:var(--color-text-placeholder);margin-bottom:12px">Imagem</div>
                 <p class="text-sm text-muted">Clique para upload</p>
                 <p class="text-xs" style="color:var(--color-text-placeholder)">PNG, JPG até 10MB</p>
               `}
@@ -107,7 +107,7 @@ function renderSpecs() {
     <div style="display:flex;gap:8px;margin-bottom:8px;align-items:center">
       <input type="text" class="form-input" placeholder="Ex: Diâmetro" value="${s.label}" onchange="specs[${i}].label=this.value" style="flex:1">
       <input type="text" class="form-input" placeholder="Ex: 280 mm" value="${s.value}" onchange="specs[${i}].value=this.value" style="flex:1">
-      <button type="button" style="padding:8px;color:var(--color-text-placeholder)" onclick="removeSpec(${i})">&#10005;</button>
+      <button type="button" style="padding:8px;color:var(--color-text-placeholder)" onclick="removeSpec(${i})">Remover</button>
     </div>
   `).join('');
 }

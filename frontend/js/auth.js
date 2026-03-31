@@ -62,21 +62,21 @@ function buildNavbar() {
 
   if (user && user.role === 'admin') {
     const links = [
-      { href: '/pages/admin/dashboard.html', label: 'Dashboard', icon: '&#9635;' },
-      { href: '/pages/admin/orders.html', label: 'Pedidos', icon: '&#128230;' },
-      { href: '/pages/admin/parts-list.html', label: 'Peças', icon: '&#128295;' },
+      { href: '/pages/admin/dashboard.html', label: 'Dashboard', icon: '' },
+      { href: '/pages/admin/orders.html', label: 'Pedidos', icon: '' },
+      { href: '/pages/admin/parts-list.html', label: 'Peças', icon: '' },
     ];
     navItems = links.map(l => {
       const active = pathname.includes(l.href.split('/').pop().replace('.html', '')) ? 'active' : '';
       return `<a href="${l.href}" class="${active}">${l.label}</a>`;
     }).join('');
     actions = `
-      <div class="navbar-admin-badge">&#128737; Admin</div>
+      <div class="navbar-admin-badge">Admin</div>
       <div class="navbar-user-pill">
         <div class="navbar-user-avatar" style="background:var(--color-primary)">${user.name.charAt(0).toUpperCase()}</div>
         <span class="navbar-user-name">${user.name}</span>
       </div>
-      <button class="navbar-logout" onclick="handleLogout()">&#10140; Sair</button>
+      <button class="navbar-logout" onclick="handleLogout()">Sair</button>
     `;
   } else if (user && user.role === 'user') {
     const links = [
@@ -91,7 +91,7 @@ function buildNavbar() {
     const cartCount = getCartCount();
     actions = `
       <a href="/pages/cart.html" class="navbar-cart">
-        &#128722;
+        🛒
         ${cartCount > 0 ? `<span class="navbar-cart-badge">${cartCount > 9 ? '9+' : cartCount}</span>` : ''}
       </a>
       <div class="navbar-user-pill">
@@ -117,7 +117,7 @@ function buildNavbar() {
       <div class="navbar-divider"></div>
       <nav class="navbar-nav">${navItems}</nav>
       <div class="navbar-actions">${actions}</div>
-      <button class="navbar-mobile-toggle" onclick="toggleMobileMenu()">&#9776;</button>
+      <button class="navbar-mobile-toggle" onclick="toggleMobileMenu()">Menu</button>
     </div>
     <div id="mobile-menu" class="navbar-mobile-menu hidden">
       ${navItems}

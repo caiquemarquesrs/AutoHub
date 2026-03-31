@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoHub - Criar Conta</title>
+  <title>AutoHub</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
       <a href="/pages/login.html" class="auth-back">&#8592; Voltar para login</a>
       <div class="auth-card">
         <div class="auth-header">
-          <div class="auth-logo auth-logo-secondary">&#128100;</div>
+          <div class="auth-logo auth-logo-secondary">AH</div>
           <h1 class="auth-title">Criar Conta</h1>
           <p class="auth-subtitle">Junte-se ao AutoHub hoje mesmo</p>
         </div>
@@ -31,7 +31,7 @@
             <label class="form-label">Senha <span class="required">*</span></label>
             <div class="form-input-icon">
               <input type="password" id="reg-password" class="form-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
-              <button type="button" class="icon-right" onclick="togglePassword('reg-password')">&#128065;</button>
+              <button type="button" class="icon-right" onclick="togglePassword('reg-password')">👁️</button>
             </div>
             <p class="form-error" id="err-password" style="display:none"></p>
           </div>
@@ -39,7 +39,7 @@
             <label class="form-label">Confirmar senha <span class="required">*</span></label>
             <div class="form-input-icon">
               <input type="password" id="reg-confirm" class="form-input" placeholder="Repita a senha" autocomplete="new-password">
-              <button type="button" class="icon-right" onclick="togglePassword('reg-confirm')">&#128065;</button>
+              <button type="button" class="icon-right" onclick="togglePassword('reg-confirm')">👁️</button>
             </div>
             <p class="form-error" id="err-confirm" style="display:none"></p>
           </div>
@@ -53,7 +53,7 @@
             <input type="text" id="reg-document" class="form-input" placeholder="000.000.000-00">
             <p class="form-error" id="err-document" style="display:none"></p>
           </div>
-          <button type="submit" id="register-btn" class="btn btn-secondary btn-full" style="margin-top:8px">Criar minha conta &#8250;</button>
+          <button type="submit" id="register-btn" class="btn btn-secondary btn-full" style="margin-top:8px">Criar minha conta</button>
           <p class="auth-footer">Já tem uma conta? <a href="/pages/login.html" style="color:var(--color-primary)">Fazer login</a></p>
         </form>
       </div>
@@ -122,7 +122,7 @@
       } catch (err) {
         showToast(err.message || 'Erro ao criar conta', 'error');
         btn.disabled = false;
-        btn.innerHTML = 'Criar minha conta &#8250;';
+        btn.innerHTML = 'Criar minha conta';
       }
     });
   </script>

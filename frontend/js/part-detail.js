@@ -6,7 +6,7 @@ async function loadPart() {
   try {
     const res = await api.parts.findById(partId);
     const part = res.data;
-    document.title = `AutoHub - ${part.name}`;
+    document.title = 'AutoHub';
     renderPart(part);
   } catch {
     document.getElementById('loading').style.display = 'none';
@@ -53,7 +53,7 @@ function renderPart(part) {
           <span class="text-sm text-muted" style="margin-bottom:4px">ou em até 12× com juros</span>
         </div>
         <div class="card" style="padding:16px;margin-bottom:24px">
-          <p class="font-semibold text-sm mb-3">&#128179; Opções de parcelamento</p>
+          <p class="font-semibold text-sm mb-3">Opções de parcelamento</p>
           ${installments.map(i => `
             <div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0">
               <span class="text-sm">${i.months}× de <strong>${formatCurrency(i.value)}</strong></span>
@@ -62,24 +62,24 @@ function renderPart(part) {
           `).join('')}
         </div>
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
-          <span class="text-xs" style="color:#6C6C70">&#128666; Frete grátis acima de R$ 300</span>
-          <span class="text-xs" style="color:#6C6C70">&#128737; Garantia inclusa</span>
+          <span class="text-xs" style="color:#6C6C70">Frete grátis acima de R$ 300</span>
+          <span class="text-xs" style="color:#6C6C70">Garantia inclusa</span>
         </div>
         <div style="display:flex;gap:12px;margin-top:auto">
-          <button class="btn btn-outline-primary" style="flex:1" onclick="handleAdd()">&#128722; Adicionar ao carrinho</button>
+          <button class="btn btn-outline-primary" style="flex:1" onclick="handleAdd()">Adicionar ao carrinho</button>
           <button class="btn btn-primary" style="flex:1" onclick="handleBuyNow()">Comprar agora</button>
         </div>
       </div>
     </div>
     <div class="grid" style="grid-template-columns:1fr 1fr;gap:24px">
       <div class="card">
-        <div class="card-header"><h2 style="font-size:15px;font-weight:600">&#8505; Especificações técnicas</h2></div>
+        <div class="card-header"><h2 style="font-size:15px;font-weight:600">Especificações técnicas</h2></div>
         ${specs.map(s => `<div style="display:flex;justify-content:space-between;padding:14px 24px;border-bottom:1px solid var(--color-border-light)"><span class="text-sm text-muted">${s.label}</span><span class="text-sm font-semibold">${s.value}</span></div>`).join('')}
       </div>
       <div class="card">
-        <div class="card-header"><h2 style="font-size:15px;font-weight:600">&#128663; Carros compatíveis</h2></div>
+        <div class="card-header"><h2 style="font-size:15px;font-weight:600">Carros compatíveis</h2></div>
         <div style="padding:16px 24px">
-          ${cars.map(c => `<div style="display:flex;align-items:flex-start;gap:10px;padding:4px 0"><span style="color:#22c55e">&#10003;</span><span class="text-sm">${c}</span></div>`).join('')}
+          ${cars.map(c => `<div style="display:flex;align-items:flex-start;gap:10px;padding:4px 0"><span class="text-sm">${c}</span></div>`).join('')}
         </div>
       </div>
     </div>

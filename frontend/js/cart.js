@@ -36,7 +36,6 @@ function renderCart() {
   if (ordered) {
     container.innerHTML = `
       <div class="empty-state" style="min-height:60vh">
-        <div style="width:80px;height:80px;border-radius:50%;background:#f0fdf4;display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:40px">&#10004;</div>
         <h2 style="font-size:22px;font-weight:700;margin-bottom:8px">Pedido realizado!</h2>
         <p class="text-muted" style="margin-bottom:24px">Seu pedido foi enviado para processamento. Acompanhe em Meus Pedidos.</p>
         <div style="display:flex;gap:12px">
@@ -55,7 +54,7 @@ function renderCart() {
       <h1 class="page-title">Carrinho</h1>
       <p class="page-subtitle mb-6">${itemCount} itens no carrinho</p>
       <div class="card empty-state">
-        <div class="empty-state-icon" style="font-size:32px">&#128722;</div>
+        <div class="empty-state-icon" style="font-size:20px">-</div>
         <h3 class="empty-state-title">Carrinho vazio</h3>
         <p class="empty-state-text">Adicione peças do catálogo para continuar.</p>
         <a href="/" class="btn btn-primary">Ver Catálogo</a>
@@ -74,7 +73,7 @@ function renderCart() {
         <h1 class="page-title">Carrinho</h1>
         <p class="page-subtitle">${itemCount} ${itemCount === 1 ? 'item' : 'itens'} no carrinho</p>
       </div>
-      <button class="text-sm text-muted" style="display:flex;align-items:center;gap:6px" onclick="handleClearCart()">&#128465; Limpar</button>
+      <button class="text-sm text-muted" style="display:flex;align-items:center;gap:6px" onclick="handleClearCart()">Limpar</button>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap">
       <div style="flex:1;min-width:300px">
@@ -96,14 +95,13 @@ function renderCart() {
               </div>
               <div style="text-align:right">
                 <p class="font-bold text-sm">${formatCurrency(item.price * item.quantity)}</p>
-                <button class="text-xs text-muted" style="margin-top:4px" onclick="removeItem(${item.part_id})">&#128465;</button>
+                <button class="text-xs text-muted" style="margin-top:4px" onclick="removeItem(${item.part_id})">Remover</button>
               </div>
             </div>
           `).join('')}
         </div>
         <div class="card" style="padding:20px;margin-bottom:16px">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-            <div style="width:32px;height:32px;border-radius:var(--radius-md);background:var(--color-secondary-light);display:flex;align-items:center;justify-content:center">&#128205;</div>
             <h3 class="font-semibold" style="font-size:15px">Endereço de entrega</h3>
           </div>
           <input type="text" id="address-input" class="form-input" placeholder="Ex: Rua das Flores, 123 — São Paulo, SP" value="${address}" oninput="address=this.value">
@@ -111,18 +109,15 @@ function renderCart() {
         </div>
         <div class="card" style="padding:20px">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-            <div style="width:32px;height:32px;border-radius:var(--radius-md);background:var(--color-secondary-light);display:flex;align-items:center;justify-content:center">&#128179;</div>
             <h3 class="font-semibold" style="font-size:15px">Forma de pagamento</h3>
           </div>
           <div style="display:flex;flex-direction:column;gap:8px">
             <label class="payment-option ${paymentType==='pix'?'active':''}" onclick="setPayment('pix')">
               <input type="radio" name="payment" value="pix" ${paymentType==='pix'?'checked':''}>
-              <div class="payment-icon" style="background:#d1fae5;color:#047857">&#128241;</div>
               <div style="flex:1"><p class="text-sm font-semibold">Pix</p><p class="text-xs" style="color:#059669">Aprovação imediata</p></div>
             </label>
             <div class="payment-option ${paymentType==='credit'?'active':''}" onclick="setPayment('credit')">
               <input type="radio" name="payment" value="credit" ${paymentType==='credit'?'checked':''}>
-              <div class="payment-icon" style="background:rgba(29,53,87,0.1);color:var(--color-secondary)">&#128179;</div>
               <div style="flex:1"><p class="text-sm font-semibold">Cartão de Crédito</p><p class="text-xs text-muted">Até 12× parcelado</p></div>
             </div>
             ${paymentType === 'credit' ? `
@@ -144,7 +139,6 @@ function renderCart() {
             ` : ''}
             <label class="payment-option ${paymentType==='debit'?'active':''}" onclick="setPayment('debit')">
               <input type="radio" name="payment" value="debit" ${paymentType==='debit'?'checked':''}>
-              <div class="payment-icon" style="background:#dbeafe;color:#2563eb">&#128179;</div>
               <div style="flex:1"><p class="text-sm font-semibold">Cartão de Débito</p><p class="text-xs text-muted">Aprovação imediata</p></div>
             </label>
           </div>

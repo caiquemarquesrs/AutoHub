@@ -18,10 +18,10 @@ function renderDashboard(data) {
   const now = new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   const stats = [
-    { title: 'Total de Pedidos', value: totalOrders, bg: '#FEF2F3', color: '#E63946', icon: '&#128722;' },
-    { title: 'Processando', value: data.processingOrders, bg: '#fffbeb', color: '#f59e0b', icon: '&#128344;' },
-    { title: 'Enviados', value: data.shippedOrders, bg: '#eff6ff', color: '#3b82f6', icon: '&#128666;' },
-    { title: 'Entregues', value: data.deliveredOrders, bg: '#f0fdf4', color: '#22c55e', icon: '&#10004;' },
+    { title: 'Total de Pedidos', value: totalOrders, bg: '#FEF2F3', color: '#E63946', icon: '' },
+    { title: 'Processando', value: data.processingOrders, bg: '#fffbeb', color: '#f59e0b', icon: '' },
+    { title: 'Enviados', value: data.shippedOrders, bg: '#eff6ff', color: '#3b82f6', icon: '' },
+    { title: 'Entregues', value: data.deliveredOrders, bg: '#f0fdf4', color: '#22c55e', icon: '' },
   ];
 
   const bars = [
@@ -38,7 +38,6 @@ function renderDashboard(data) {
     <div class="grid grid-4 mb-6">
       ${stats.map(s => `
         <div class="stat-card">
-          <div class="stat-card-icon" style="background:${s.bg};color:${s.color};font-size:20px">${s.icon}</div>
           <p class="stat-card-label">${s.title}</p>
           <p class="stat-card-value">${s.value}</p>
         </div>
@@ -47,7 +46,6 @@ function renderDashboard(data) {
     <div class="grid" style="grid-template-columns:1fr 2fr;gap:16px;margin-bottom:24px">
       <div class="revenue-card">
         <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-          <div style="width:36px;height:36px;border-radius:var(--radius-md);background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:18px">&#128200;</div>
           <span style="color:rgba(255,255,255,0.8);font-size:14px">Receita Total</span>
         </div>
         <p style="font-size:30px;font-weight:700;margin-bottom:4px">${formatCurrency(data.totalRevenue)}</p>
@@ -69,7 +67,7 @@ function renderDashboard(data) {
     <div class="card" style="overflow:hidden">
       <div class="card-header">
         <h3 style="font-size:15px;font-weight:600">Pedidos Recentes</h3>
-        <a href="/pages/admin/orders.html" class="text-sm font-semibold text-primary">Ver todos &#8594;</a>
+        <a href="/pages/admin/orders.html" class="text-sm font-semibold text-primary">Ver todos</a>
       </div>
       <div class="table-wrapper">
         <table class="table">
@@ -82,7 +80,7 @@ function renderDashboard(data) {
                 <td><span class="text-sm text-muted">${formatDate(o.created_at)}</span></td>
                 <td><span class="text-sm font-semibold">${formatCurrency(o.total)}</span></td>
                 <td>${createStatusBadge(o.status, 'sm')}</td>
-                <td class="text-right"><a href="/pages/admin/order-detail.html?id=${o.id}" class="text-xs font-semibold text-primary">Ver &#8594;</a></td>
+                <td class="text-right"><a href="/pages/admin/order-detail.html?id=${o.id}" class="text-xs font-semibold text-primary">Ver</a></td>
               </tr>
             `).join('')}
           </tbody>

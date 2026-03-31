@@ -21,7 +21,7 @@ async function loadOrders() {
 function renderStatusFilters() {
   const filters = ['Todos', 'Processando', 'Enviado', 'Entregue'];
   const colors = { Todos: 'var(--color-secondary)', Processando: '#f59e0b', Enviado: '#3b82f6', Entregue: '#22c55e' };
-  document.getElementById('status-filters').innerHTML = filters.map(f =>
+  document.getElementById('status-filters').innerHTML = `<span style="font-size:12px;color:var(--color-text-muted);padding:0 6px">🏷️</span>` + filters.map(f =>
     `<button class="filter-chip ${f === statusFilter ? 'active' : ''}" style="${f === statusFilter ? 'background:'+colors[f]+';color:#fff' : ''}" onclick="setStatusFilter('${f}')">${f}</button>`
   ).join('');
 }
@@ -57,7 +57,7 @@ function renderOrders() {
       <td><span class="text-sm font-semibold">${formatCurrency(o.total)}</span></td>
       <td><span class="text-sm text-muted">${formatDate(o.created_at)}</span></td>
       <td>${createStatusBadge(o.status, 'sm')}</td>
-      <td class="text-right"><a href="/pages/admin/order-detail.html?id=${o.id}" class="btn-danger-outline">Ver detalhes &#8594;</a></td>
+      <td class="text-right"><a href="/pages/admin/order-detail.html?id=${o.id}" class="btn-danger-outline">Ver detalhes</a></td>
     </tr>
   `).join('');
 

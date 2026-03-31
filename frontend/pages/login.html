@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AutoHub - Login</title>
+  <title>AutoHub</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -26,10 +26,10 @@
             <label class="form-label">Senha</label>
             <div class="form-input-icon">
               <input type="password" id="password" class="form-input" placeholder="••••••••" autocomplete="current-password">
-              <button type="button" class="icon-right" onclick="togglePassword('password', this)">&#128065;</button>
+              <button type="button" class="icon-right" onclick="togglePassword('password', this)">👁️</button>
             </div>
           </div>
-          <button type="submit" id="login-btn" class="btn btn-primary btn-full" style="margin-top:8px">Entrar &#8250;</button>
+          <button type="submit" id="login-btn" class="btn btn-primary btn-full" style="margin-top:8px">Entrar</button>
           <div class="auth-hint" style="margin-top:16px">
             <strong>Admin:</strong> usuário <code>admin@autohub.com</code> · senha <code>admin</code><br>
             <strong>Usuário:</strong> <code>maria@email.com</code> · senha <code>123456</code>
@@ -70,7 +70,7 @@
         errorDiv.querySelector('p').textContent = err.message || 'Credenciais inválidas';
         errorDiv.style.display = 'block';
         btn.disabled = false;
-        btn.innerHTML = 'Entrar &#8250;';
+        btn.innerHTML = 'Entrar';
       }
     });
   </script>

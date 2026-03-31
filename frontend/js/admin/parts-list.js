@@ -23,7 +23,7 @@ async function loadParts() {
 
 function renderCategoryFilters() {
   const allCats = ['Todos', ...categories.map(c => c.name)];
-  document.getElementById('category-filters').innerHTML = allCats.map(cat =>
+  document.getElementById('category-filters').innerHTML = `<span style="font-size:12px;color:var(--color-text-muted);padding:0 6px">🏷️</span>` + allCats.map(cat =>
     `<button class="filter-chip ${cat === activeCategory ? 'active' : ''}" onclick="setCategoryFilter('${cat}')">${cat}</button>`
   ).join('');
 }
@@ -60,8 +60,8 @@ function renderParts() {
       <td><span class="text-sm font-bold text-primary">${formatCurrency(p.price)}</span></td>
       <td class="text-right">
         <div style="display:flex;gap:8px;justify-content:flex-end">
-          <a href="/pages/admin/part-form.html?id=${p.id}" class="btn-danger-outline" style="color:var(--color-secondary);border-color:rgba(29,53,87,0.2)">&#9998; Editar</a>
-          <button class="btn-danger-outline" onclick="confirmDelete(${p.id}, '${p.name.replace(/'/g,"\\'")}')">&#128465; Excluir</button>
+          <a href="/pages/admin/part-form.html?id=${p.id}" class="btn-danger-outline" style="color:var(--color-secondary);border-color:rgba(29,53,87,0.2)">Editar</a>
+          <button class="btn-danger-outline" onclick="confirmDelete(${p.id}, '${p.name.replace(/'/g,"\\'")}')">Excluir</button>
         </div>
       </td>
     </tr>
@@ -77,7 +77,7 @@ function confirmDelete(id, name) {
     <div class="modal-overlay">
       <div class="modal-backdrop" onclick="closeModal()"></div>
       <div class="modal-content">
-        <div class="modal-icon">&#9888;</div>
+        <div class="modal-icon">!</div>
         <h3 class="modal-title">Excluir peça?</h3>
         <p class="modal-description">A peça "${name}" será removida permanentemente do catálogo. Essa ação não pode ser desfeita.</p>
         <div class="modal-actions">

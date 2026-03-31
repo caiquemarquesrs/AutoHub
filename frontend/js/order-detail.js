@@ -31,7 +31,7 @@ function renderOrder(order) {
     { label: 'Entregue', done: order.status === 'Entregue' },
   ];
   const currentIdx = steps.findIndex(s => s.label === order.status);
-  const stepIcons = ['&#128344;', '&#128666;', '&#10004;'];
+  const stepIcons = ['1', '2', '3'];
 
   content.innerHTML = `
     <a href="/pages/orders.html" class="auth-back" style="margin-bottom:24px">&#8592; Meus Pedidos</a>

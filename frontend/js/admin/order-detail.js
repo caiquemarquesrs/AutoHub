@@ -28,9 +28,9 @@ function renderOrder() {
   const order = currentOrder;
   const content = document.getElementById('content');
   const statusSteps = [
-    { status: 'Processando', icon: '&#128344;', label: 'Processar' },
-    { status: 'Enviado', icon: '&#128666;', label: 'Enviar' },
-    { status: 'Entregue', icon: '&#10004;', label: 'Entregar' },
+    { status: 'Processando', icon: '1', label: 'Processar' },
+    { status: 'Enviado', icon: '2', label: 'Enviar' },
+    { status: 'Entregue', icon: '3', label: 'Entregar' },
   ];
   const currentIdx = statusSteps.findIndex(s => s.status === order.status);
   const statusBtnColors = { Enviado: 'background:#3b82f6;color:#fff', Entregue: 'background:#22c55e;color:#fff' };
@@ -89,7 +89,7 @@ function renderOrder() {
               else if (isNext) { style = statusBtnColors[step.status] || ''; disabled = ''; }
               else if (isPast) { style = 'background:var(--color-bg-alt);color:var(--color-text-placeholder);cursor:not-allowed'; disabled = 'disabled'; }
               const label = isActive ? `${step.status} (atual)` : isPast ? `${step.status} ✓` : `Marcar como ${step.status}`;
-              return `<button ${disabled} onclick="advanceStatus('${step.status}')" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:600;transition:all 0.2s;${style}">${step.icon} <span style="flex:1;text-align:left">${label}</span>${isNext?'&#8250;':''}</button>`;
+              return `<button ${disabled} onclick="advanceStatus('${step.status}')" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:600;transition:all 0.2s;${style}">${step.icon} <span style="flex:1;text-align:left">${label}</span>${isNext?'Prox.':''}</button>`;
             }).join('')}
           </div>
         </div>
