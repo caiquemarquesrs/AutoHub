@@ -1,0 +1,27 @@
+{
+  "name": "autohub",
+  "version": "1.0.0",
+  "description": "E-commerce de produtos automobilísticos - Projeto Integrado PUC Goiás",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "seed": "node backend/src/seed/seed.js"
+  },
+  "keywords": ["ecommerce", "automotive", "nodejs", "express"],
+  "author": "AutoHub Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.0",
+    "better-sqlite3": "^11.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "multer": "^1.4.5-lts.1",
+    "express-validator": "^7.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

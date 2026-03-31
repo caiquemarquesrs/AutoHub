@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoHub - Criar Conta</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-wrapper">
+      <a href="/pages/login.html" class="auth-back">&#8592; Voltar para login</a>
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="auth-logo auth-logo-secondary">&#128100;</div>
+          <h1 class="auth-title">Criar Conta</h1>
+          <p class="auth-subtitle">Junte-se ao AutoHub hoje mesmo</p>
+        </div>
+        <form id="register-form" class="auth-form">
+          <div class="form-group">
+            <label class="form-label">Usuário <span class="required">*</span></label>
+            <input type="text" id="reg-name" class="form-input" placeholder="Escolha um nome de usuário" autocomplete="username">
+            <p class="form-error" id="err-name" style="display:none"></p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-mail <span class="required">*</span></label>
+            <input type="email" id="reg-email" class="form-input" placeholder="seu@email.com" autocomplete="email">
+            <p class="form-error" id="err-email" style="display:none"></p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Senha <span class="required">*</span></label>
+            <div class="form-input-icon">
+              <input type="password" id="reg-password" class="form-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+              <button type="button" class="icon-right" onclick="togglePassword('reg-password')">&#128065;</button>
+            </div>
+            <p class="form-error" id="err-password" style="display:none"></p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirmar senha <span class="required">*</span></label>
+            <div class="form-input-icon">
+              <input type="password" id="reg-confirm" class="form-input" placeholder="Repita a senha" autocomplete="new-password">
+              <button type="button" class="icon-right" onclick="togglePassword('reg-confirm')">&#128065;</button>
+            </div>
+            <p class="form-error" id="err-confirm" style="display:none"></p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Celular <span class="required">*</span></label>
+            <input type="tel" id="reg-phone" class="form-input" placeholder="(00) 00000-0000" autocomplete="tel">
+            <p class="form-error" id="err-phone" style="display:none"></p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">CPF / CNPJ <span class="required">*</span></label>
+            <input type="text" id="reg-document" class="form-input" placeholder="000.000.000-00">
+            <p class="form-error" id="err-document" style="display:none"></p>
+          </div>
+          <button type="submit" id="register-btn" class="btn btn-secondary btn-full" style="margin-top:8px">Criar minha conta &#8250;</button>
+          <p class="auth-footer">Já tem uma conta? <a href="/pages/login.html" style="color:var(--color-primary)">Fazer login</a></p>
+        </form>
+      </div>
+      <p class="auth-copyright">AutoHub © 2026 · Sistema de Gestão de Pedidos</p>
+    </div>
+  </div>
+  <script src="/js/services/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    function togglePassword(id) {
+      const input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+    function formatPhone(val) {
+      const d = val.replace(/\D/g, '').slice(0, 11);
+      if (d.length <= 2) return '(' + d;
+      if (d.length <= 7) return '(' + d.slice(0,2) + ') ' + d.slice(2);
+      return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7);
+    }
+    function formatDoc(val) {
+      const d = val.replace(/\D/g, '');
+      if (d.length <= 11) {
+        if (d.length <= 3) return d;
+        if (d.length <= 6) return d.slice(0,3)+'.'+d.slice(3);
+        if (d.length <= 9) return d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6);
+        return d.slice(0,3)+'.'+d.slice(3,6)+'.'+d.slice(6,9)+'-'+d.slice(9,11);
+      }
+      const c = d.slice(0,14);
+      if (c.length <= 2) return c;
+      if (c.length <= 5) return c.slice(0,2)+'.'+c.slice(2);
+      if (c.length <= 8) return c.slice(0,2)+'.'+c.slice(2,5)+'.'+c.slice(5);
+      if (c.length <= 12) return c.slice(0,2)+'.'+c.slice(2,5)+'.'+c.slice(5,8)+'/'+c.slice(8);
+      return c.slice(0,2)+'.'+c.slice(2,5)+'.'+c.slice(5,8)+'/'+c.slice(8,12)+'-'+c.slice(12);
+    }
+    document.getElementById('reg-phone').addEventListener('input', function() { this.value = formatPhone(this.value); });
+    document.getElementById('reg-document').addEventListener('input', function() { this.value = formatDoc(this.value); });
+
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      document.querySelectorAll('.form-error').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const password = document.getElementById('reg-password').value;
+      const confirm = document.getElementById('reg-confirm').value;
+      const phone = document.getElementById('reg-phone').value.trim();
+      const cpf_cnpj = document.getElementById('reg-document').value.trim();
+      let hasError = false;
+      function setErr(field, msg) { document.getElementById('err-'+field).textContent = msg; document.getElementById('err-'+field).style.display = 'block'; document.getElementById('reg-'+field).classList.add('error'); hasError = true; }
+      if (!name) setErr('name', 'Informe seu nome de usuário');
+      if (!email) setErr('email', 'Informe seu e-mail');
+      else if (!email.includes('@')) setErr('email', 'Digite um e-mail válido');
+      if (password.length < 6) setErr('password', 'A senha deve ter ao menos 6 caracteres');
+      if (!confirm) setErr('confirm', 'Confirme sua senha');
+      else if (password !== confirm) setErr('confirm', 'As senhas não coincidem');
+      if (!phone) setErr('phone', 'Informe seu número de celular');
+      if (!cpf_cnpj) setErr('document', 'Informe seu CPF ou CNPJ');
+      if (hasError) return;
+      const btn = document.getElementById('register-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>';
+      try {
+        await api.auth.register({ name, email, password, phone, cpf_cnpj });
+        showToast('Conta criada! Faça login para continuar.');
+        setTimeout(() => { window.location.href = '/pages/login.html'; }, 800);
+      } catch (err) {
+        showToast(err.message || 'Erro ao criar conta', 'error');
+        btn.disabled = false;
+        btn.innerHTML = 'Criar minha conta &#8250;';
+      }
+    });
+  </script>
+</body>
+</html>

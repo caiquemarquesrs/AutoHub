@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoHub - Login</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="auth-page">
+    <div class="auth-wrapper">
+      <a href="/" class="auth-back">&#8592; Voltar ao catálogo</a>
+      <div class="auth-card">
+        <div class="auth-header">
+          <div class="auth-logo auth-logo-primary">AH</div>
+          <h1 class="auth-title">Bem-vindo de volta</h1>
+          <p class="auth-subtitle">Entre na sua conta para continuar</p>
+        </div>
+        <form id="login-form" class="auth-form">
+          <div id="login-error" class="auth-error" style="display:none"><p></p></div>
+          <div class="form-group">
+            <label class="form-label">Usuário ou e-mail</label>
+            <input type="text" id="identifier" class="form-input" placeholder="Digite seu usuário ou e-mail" autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Senha</label>
+            <div class="form-input-icon">
+              <input type="password" id="password" class="form-input" placeholder="••••••••" autocomplete="current-password">
+              <button type="button" class="icon-right" onclick="togglePassword('password', this)">&#128065;</button>
+            </div>
+          </div>
+          <button type="submit" id="login-btn" class="btn btn-primary btn-full" style="margin-top:8px">Entrar &#8250;</button>
+          <div class="auth-hint" style="margin-top:16px">
+            <strong>Admin:</strong> usuário <code>admin@autohub.com</code> · senha <code>admin</code><br>
+            <strong>Usuário:</strong> <code>maria@email.com</code> · senha <code>123456</code>
+          </div>
+          <p class="auth-footer">Não tem conta? <a href="/pages/register.html" style="color:var(--color-secondary)">Criar conta</a></p>
+        </form>
+      </div>
+      <p class="auth-copyright">AutoHub © 2026 · Sistema de Gestão de Pedidos</p>
+    </div>
+  </div>
+  <script src="/js/services/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    function togglePassword(id, btn) {
+      const input = document.getElementById(id);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const errorDiv = document.getElementById('login-error');
+      errorDiv.style.display = 'none';
+      const email = document.getElementById('identifier').value.trim();
+      const password = document.getElementById('password').value.trim();
+      if (!email) { errorDiv.querySelector('p').textContent = 'Informe seu usuário ou e-mail'; errorDiv.style.display = 'block'; return; }
+      if (!password) { errorDiv.querySelector('p').textContent = 'Informe sua senha'; errorDiv.style.display = 'block'; return; }
+      const btn = document.getElementById('login-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>';
+      try {
+        const res = await api.auth.login(email, password);
+        setToken(res.data.token);
+        setUser(res.data.user);
+        showToast('Login realizado com sucesso!');
+        setTimeout(() => {
+          window.location.href = res.data.user.role === 'admin' ? '/pages/admin/dashboard.html' : '/';
+        }, 500);
+      } catch (err) {
+        errorDiv.querySelector('p').textContent = err.message || 'Credenciais inválidas';
+        errorDiv.style.display = 'block';
+        btn.disabled = false;
+        btn.innerHTML = 'Entrar &#8250;';
+      }
+    });
+  </script>
+</body>
+</html>

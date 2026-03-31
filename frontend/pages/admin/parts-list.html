@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoHub Admin - Peças Cadastradas</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+  <main class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
+      <div>
+        <h1 class="page-title">Peças Cadastradas</h1>
+        <p class="page-subtitle" id="total-text"></p>
+      </div>
+      <a href="/pages/admin/part-form.html" class="btn btn-primary btn-sm">+ Nova Peça</a>
+    </div>
+    <div class="filter-bar">
+      <div class="filter-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="search-input" placeholder="Buscar por nome ou código...">
+      </div>
+      <div class="filter-chips" id="category-filters"></div>
+    </div>
+    <div id="loading" class="empty-state"><div class="spinner spinner-dark"></div></div>
+    <div id="table-card" class="card" style="overflow:hidden;display:none">
+      <div class="table-wrapper"><table class="table" id="parts-table"><thead><tr><th>Imagem</th><th>Código</th><th>Nome</th><th>Categoria</th><th>Preço</th><th></th></tr></thead><tbody id="parts-body"></tbody></table></div>
+    </div>
+    <div id="empty-state" class="card empty-state" style="display:none">
+      <div class="empty-state-icon">&#128269;</div>
+      <p class="empty-state-title">Nenhuma peça encontrada</p>
+      <p class="empty-state-text">Tente ajustar os filtros ou a busca.</p>
+    </div>
+    <p id="count-text" class="text-sm text-muted mt-4"></p>
+  </main>
+  <div id="delete-modal" style="display:none"></div>
+  <script src="/js/services/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/admin/parts-list.js"></script>
+</body>
+</html>

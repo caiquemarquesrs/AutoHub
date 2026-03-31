@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AutoHub - Catálogo de Peças</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header id="navbar" class="navbar"></header>
+  <main class="container">
+    <div class="page-header">
+      <h1 class="page-title">Catálogo de Peças</h1>
+      <p class="page-subtitle">Encontre as peças que você precisa para o seu veículo</p>
+    </div>
+    <div class="filter-bar">
+      <div class="filter-search">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="search-input" placeholder="Buscar peça...">
+      </div>
+      <div class="filter-chips" id="category-filters"></div>
+    </div>
+    <div id="loading" class="empty-state"><div class="spinner spinner-dark"></div></div>
+    <div id="products-grid" class="grid grid-5" style="display:none"></div>
+    <div id="empty-state" class="empty-state" style="display:none">
+      <div class="empty-state-icon">&#128270;</div>
+      <p class="empty-state-title">Nenhuma peça encontrada</p>
+      <p class="empty-state-text">Tente ajustar sua busca ou categoria.</p>
+    </div>
+    <p id="count-text" class="text-sm text-muted mt-4"></p>
+  </main>
+  <script src="/js/services/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/catalog.js"></script>
+</body>
+</html>

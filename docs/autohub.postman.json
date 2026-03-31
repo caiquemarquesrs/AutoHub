@@ -1,0 +1,496 @@
+{
+	"info": {
+		"_postman_id": "autohub-collection",
+		"name": "AutoHub API",
+		"description": "Coleção completa da API AutoHub — E-commerce de peças automotivas.\n\nPasso 1: Execute POST Login (admin ou user) para obter o token.\nPasso 2: O token é salvo automaticamente na variável {{token}}.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	],
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Registrar usuário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Teste Postman\",\n  \"email\": \"teste@postman.com\",\n  \"password\": \"123456\",\n  \"phone\": \"(11) 99999-9999\",\n  \"cpf_cnpj\": \"123.456.789-00\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/register",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "register"]
+						},
+						"description": "Cria um novo usuário com perfil 'user'."
+					},
+					"response": []
+				},
+				{
+					"name": "Login (admin)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.data && jsonData.data.token) {",
+									"    pm.collectionVariables.set('token', jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"admin@autohub.com\",\n  \"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "login"]
+						},
+						"description": "Login como admin. O token é salvo automaticamente na variável {{token}}."
+					},
+					"response": []
+				},
+				{
+					"name": "Login (user)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.data && jsonData.data.token) {",
+									"    pm.collectionVariables.set('token', jsonData.data.token);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"maria@email.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login",
+							"host": ["{{baseUrl}}"],
+							"path": ["auth", "login"]
+						},
+						"description": "Login como usuário comum. O token é salvo automaticamente na variável {{token}}."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parts (Público)",
+			"item": [
+				{
+					"name": "Listar peças",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/parts",
+							"host": ["{{baseUrl}}"],
+							"path": ["parts"]
+						},
+						"description": "Lista todas as peças. Aceita query params: ?search=filtro&category=1"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar peças (com filtro)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/parts?search=pastilha&category=2",
+							"host": ["{{baseUrl}}"],
+							"path": ["parts"],
+							"query": [
+								{
+									"key": "search",
+									"value": "pastilha"
+								},
+								{
+									"key": "category",
+									"value": "2"
+								}
+							]
+						},
+						"description": "Lista peças filtrando por nome e/ou categoria."
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhe da peça",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/parts/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["parts", "1"]
+						},
+						"description": "Retorna os dados completos de uma peça pelo ID."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories (Público)",
+			"item": [
+				{
+					"name": "Listar categorias",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/categories",
+							"host": ["{{baseUrl}}"],
+							"path": ["categories"]
+						},
+						"description": "Retorna todas as categorias de peças."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders (Usuário)",
+			"item": [
+				{
+					"name": "Listar meus pedidos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders"]
+						},
+						"description": "Lista todos os pedidos do usuário autenticado."
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhe do meu pedido",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/orders/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders", "1"]
+						},
+						"description": "Retorna os detalhes de um pedido do usuário autenticado."
+					},
+					"response": []
+				},
+				{
+					"name": "Criar pedido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"address\": \"Rua das Flores, 123 - São Paulo/SP\",\n  \"payment_method\": \"credit\",\n  \"installments\": 3,\n  \"items\": [\n    { \"part_id\": 1, \"quantity\": 2 },\n    { \"part_id\": 3, \"quantity\": 1 }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["orders"]
+						},
+						"description": "Cria um novo pedido. Itens, endereço e pagamento são obrigatórios."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Dashboard",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/dashboard",
+							"host": ["{{baseUrl}}"],
+							"path": ["admin", "dashboard"]
+						},
+						"description": "KPIs: total de pedidos, pedidos por status, receita total, pedidos recentes."
+					},
+					"response": []
+				},
+				{
+					"name": "Listar todos os pedidos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/orders",
+							"host": ["{{baseUrl}}"],
+							"path": ["admin", "orders"]
+						},
+						"description": "Lista todos os pedidos do sistema. Aceita ?search e ?status."
+					},
+					"response": []
+				},
+				{
+					"name": "Detalhe pedido (admin)",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/orders/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["admin", "orders", "1"]
+						},
+						"description": "Dados completos de qualquer pedido."
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar status do pedido",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"Enviado\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/orders/1/status",
+							"host": ["{{baseUrl}}"],
+							"path": ["admin", "orders", "1", "status"]
+						},
+						"description": "Atualiza status: Processando → Enviado → Entregue (sequencial, sem voltar)."
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar peça",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Filtro de Ar Esportivo",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "189.90",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Filtro de ar de alto fluxo para melhor desempenho do motor.",
+									"type": "text"
+								},
+								{
+									"key": "specifications",
+									"value": "[\"Tipo: Cônico\", \"Material: Algodão\", \"Lavável: Sim\"]",
+									"type": "text"
+								},
+								{
+									"key": "compatible_cars",
+									"value": "[\"Honda Civic 2018-2024\", \"Honda Accord 2020-2024\"]",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "",
+									"description": "Selecione uma imagem (opcional)"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/parts",
+							"host": ["{{baseUrl}}"],
+							"path": ["admin", "parts"]
+						},
+						"description": "Cria uma nova peça. Enviar como form-data para suportar upload de imagem."
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar peça",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Filtro de Ar Esportivo K&N",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "219.90",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Filtro de ar esportivo K&N de alto desempenho.",
+									"type": "text"
+								},
+								{
+									"key": "specifications",
+									"value": "[\"Tipo: Cônico\", \"Material: Algodão\", \"Lavável: Sim\", \"Marca: K&N\"]",
+									"type": "text"
+								},
+								{
+									"key": "compatible_cars",
+									"value": "[\"Honda Civic 2018-2024\", \"Honda Accord 2020-2024\", \"Toyota Corolla 2020-2024\"]",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "",
+									"description": "Nova imagem (opcional)"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/admin/parts/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["admin", "parts", "1"]
+						},
+						"description": "Atualiza uma peça existente. Enviar como form-data."
+					},
+					"response": []
+				},
+				{
+					"name": "Remover peça",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/admin/parts/10",
+							"host": ["{{baseUrl}}"],
+							"path": ["admin", "parts", "10"]
+						},
+						"description": "Remove uma peça pelo ID."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
