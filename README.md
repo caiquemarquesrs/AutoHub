@@ -1,32 +1,28 @@
 # AutoHub - E-commerce de Produtos Automobilísticos
 
-Projeto Integrado — Desenvolvimento Web + Design de Software
-
 ## Sobre o Projeto
 
 AutoHub é um sistema de e-commerce voltado para peças automotivas, desenvolvido como projeto acadêmico. O sistema permite que visitantes naveguem pelo catálogo, usuários realizem compras e administradores gerenciem pedidos e produtos.
 
 ## Tecnologias
 
-| Camada | Tecnologia |
-|--------|-----------|
-| Backend | Node.js + Express.js |
-| Banco de Dados | SQLite (better-sqlite3) |
-| Frontend | HTML5 + CSS3 + JavaScript puro |
-| Autenticação | JWT (jsonwebtoken) + bcryptjs |
-| Upload de imagens | Multer |
-| Validação | express-validator |
+Node.js + Express.js
+SQLite (better-sqlite3)
+HTML5 + CSS3 + JavaScript
+JWT (jsonwebtoken) + bcryptjs
+Multer
+express-validator
 
 ## Pré-requisitos
 
-- [Node.js](https://nodejs.org/) (v18 ou superior)
-- npm (incluído com o Node.js)
+- Node.js
+- npm
 
 ## Instalação e Execução
 
 ```bash
 # 1. Clonar o repositório
-git clone https://github.com/seu-usuario/autohub.git
+git clone https://github.com/caiquemarquesrs/AutoHub.git
 cd autohub
 
 # 2. Instalar dependências
@@ -71,11 +67,9 @@ npm install && npm run seed && npm start
 
 ## Scripts Disponíveis
 
-| Comando | Descrição |
-|---------|-----------|
-| `npm start` | Inicia o servidor em modo produção |
-| `npm run dev` | Inicia com nodemon (hot reload) |
-| `npm run seed` | Popula o banco com dados de exemplo |
+`npm start` (Inicia o servidor em modo produção)
+`npm run dev` (Inicia com nodemon (hot reload))
+`npm run seed` (Popula o banco com dados de exemplo )
 
 ## Credenciais de Acesso
 
@@ -175,19 +169,3 @@ Consulte `docs/design-patterns.md` para detalhes completos.
 3. **DIP** — Dependency Inversion Principle
 
 Consulte `docs/solid.md` para detalhes completos.
-
-## Entregáveis
-
-- [x] Repositório GitHub com código fonte
-- [x] Aplicação funcional (backend + frontend)
-- [x] Banco de dados SQLite com seed
-- [x] Coleção Postman (`docs/autohub.postman.json`)
-- [x] Diagrama ER (`docs/diagrama-er.md`)
-- [x] Diagrama Estrutural (`docs/diagrama-estrutural.md`)
-- [x] Documentação de Design Patterns (`docs/design-patterns.md`)
-- [x] Documentação de SOLID (`docs/solid.md`)
-- [x] README completo
-
-## Autor
-
-AutoHub Team — Projeto Integrado 2026
