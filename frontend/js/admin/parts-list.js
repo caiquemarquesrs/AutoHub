@@ -23,7 +23,7 @@ async function loadParts() {
 
 function renderCategoryFilters() {
   const allCats = ['Todos', ...categories.map(c => c.name)];
-  document.getElementById('category-filters').innerHTML = `<span style="font-size:12px;color:var(--color-text-muted);padding:0 6px">🏷️</span>` + allCats.map(cat =>
+  document.getElementById('category-filters').innerHTML = `<span class="filter-tag-lead">${icon('tag', 16)}</span>` + allCats.map(cat =>
     `<button class="filter-chip ${cat === activeCategory ? 'active' : ''}" onclick="setCategoryFilter('${cat}')">${cat}</button>`
   ).join('');
 }

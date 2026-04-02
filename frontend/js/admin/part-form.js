@@ -33,7 +33,7 @@ function renderForm() {
   const isEdit = !!editPart;
 
   content.innerHTML = `
-    <a href="/pages/admin/parts-list.html" class="auth-back" style="margin-bottom:16px">&#8592; Lista de Peças</a>
+    <a href="/pages/admin/parts-list.html" class="auth-back auth-back-with-icon" style="margin-bottom:16px">${icon('arrowLeft', 16)} Lista de Peças</a>
     <h1 class="page-title">${isEdit ? 'Editar Peça' : 'Nova Peça'}</h1>
     <p class="page-subtitle mb-6">${isEdit ? 'Atualize as informações da peça no catálogo.' : 'Preencha os dados para adicionar uma peça ao catálogo.'}</p>
     <div class="card">

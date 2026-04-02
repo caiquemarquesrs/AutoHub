@@ -38,11 +38,11 @@ function renderPart(part) {
   const cars = part.compatible_cars || [];
 
   content.innerHTML = `
-    <a href="/" class="auth-back" style="margin-bottom:24px">&#8592; Voltar ao catálogo</a>
+    <a href="/" class="auth-back auth-back-with-icon" style="margin-bottom:24px">${icon('arrowLeft', 16)} Voltar ao catálogo</a>
     <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px">
       <div style="border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:1;position:relative">
         <img src="${part.image_url}" alt="${part.name}" style="width:100%;height:100%;object-fit:cover">
-        <span class="product-card-category" style="top:16px;left:16px;font-size:12px;padding:4px 12px">${part.category_name || ''}</span>
+        <span class="product-card-category" style="top:16px;left:16px;font-size:12px;padding:4px 12px;display:inline-flex;align-items:center;gap:6px"><span class="part-detail-tag-icon">${icon('tag', 14)}</span>${part.category_name || ''}</span>
       </div>
       <div style="display:flex;flex-direction:column">
         <p class="font-mono text-xs text-muted" style="letter-spacing:0.1em;margin-bottom:4px">#${part.id}</p>

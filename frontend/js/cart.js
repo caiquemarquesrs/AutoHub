@@ -6,9 +6,9 @@ const installmentOptions = [
   { value: 1, label: '1× sem juros' },
   { value: 2, label: '2× sem juros' },
   { value: 3, label: '3× sem juros' },
-  { value: 6, label: '6× com juros (3,99%)' },
-  { value: 10, label: '10× com juros (7,99%)' },
-  { value: 12, label: '12× com juros (10,99%)' },
+  { value: 6, label: '6× com juros (3,99% a.m.)' },
+  { value: 10, label: '10× com juros (7,99% a.m.)' },
+  { value: 12, label: '12× com juros (10,99% a.m.)' },
 ];
 const rates = { 6: 1.0399, 10: 1.0799, 12: 1.1099 };
 let paymentType = '';
@@ -36,6 +36,7 @@ function renderCart() {
   if (ordered) {
     container.innerHTML = `
       <div class="empty-state" style="min-height:60vh">
+        <div class="cart-order-success-icon">${icon('checkCircle2', 40)}</div>
         <h2 style="font-size:22px;font-weight:700;margin-bottom:8px">Pedido realizado!</h2>
         <p class="text-muted" style="margin-bottom:24px">Seu pedido foi enviado para processamento. Acompanhe em Meus Pedidos.</p>
         <div style="display:flex;gap:12px">
@@ -50,7 +51,7 @@ function renderCart() {
 
   if (cart.length === 0) {
     container.innerHTML = `
-      <a href="/" class="auth-back" style="margin-bottom:16px">&#8592; Continuar comprando</a>
+      <a href="/" class="auth-back auth-back-with-icon" style="margin-bottom:16px">${icon('arrowLeft', 16)} Continuar comprando</a>
       <h1 class="page-title">Carrinho</h1>
       <p class="page-subtitle mb-6">${itemCount} itens no carrinho</p>
       <div class="card empty-state">
@@ -67,13 +68,13 @@ function renderCart() {
   const total = getTotal();
 
   container.innerHTML = `
-    <a href="/" class="auth-back" style="margin-bottom:16px">&#8592; Continuar comprando</a>
+    <a href="/" class="auth-back auth-back-with-icon" style="margin-bottom:16px">${icon('arrowLeft', 16)} Continuar comprando</a>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
       <div>
         <h1 class="page-title">Carrinho</h1>
         <p class="page-subtitle">${itemCount} ${itemCount === 1 ? 'item' : 'itens'} no carrinho</p>
       </div>
-      <button class="text-sm text-muted" style="display:flex;align-items:center;gap:6px" onclick="handleClearCart()">🗑️</button>
+      <button type="button" class="btn-clear-cart text-sm" onclick="handleClearCart()" aria-label="Esvaziar carrinho">${icon('trash2', 18)}</button>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap">
       <div style="flex:1;min-width:300px">

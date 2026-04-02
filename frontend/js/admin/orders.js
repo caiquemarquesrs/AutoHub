@@ -21,7 +21,7 @@ async function loadOrders() {
 function renderStatusFilters() {
   const filters = ['Todos', 'Processando', 'Enviado', 'Entregue'];
   const colors = { Todos: 'var(--color-secondary)', Processando: '#f59e0b', Enviado: '#3b82f6', Entregue: '#22c55e' };
-  document.getElementById('status-filters').innerHTML = `<span style="font-size:12px;color:var(--color-text-muted);padding:0 6px">🏷️</span>` + filters.map(f =>
+  document.getElementById('status-filters').innerHTML = `<span class="filter-tag-lead">${icon('tag', 16)}</span>` + filters.map(f =>
     `<button class="filter-chip ${f === statusFilter ? 'active' : ''}" style="${f === statusFilter ? 'background:'+colors[f]+';color:#fff' : ''}" onclick="setStatusFilter('${f}')">${f}</button>`
   ).join('');
 }

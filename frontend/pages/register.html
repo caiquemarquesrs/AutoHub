@@ -9,7 +9,7 @@
 <body>
   <div class="auth-page">
     <div class="auth-wrapper">
-      <a href="/pages/login.html" class="auth-back">&#8592; Voltar para login</a>
+      <a href="/pages/login.html" class="auth-back auth-back-with-icon"><span data-ui-icon="arrowLeft" data-ui-size="16"></span> Voltar para login</a>
       <div class="auth-card">
         <div class="auth-header">
           <div class="auth-logo auth-logo-secondary">AH</div>
@@ -31,7 +31,7 @@
             <label class="form-label">Senha <span class="required">*</span></label>
             <div class="form-input-icon">
               <input type="password" id="reg-password" class="form-input" placeholder="Mínimo 6 caracteres" autocomplete="new-password">
-              <button type="button" class="icon-right" onclick="togglePassword('reg-password')">👁️</button>
+              <button type="button" class="icon-right" data-password-toggle="reg-password"></button>
             </div>
             <p class="form-error" id="err-password" style="display:none"></p>
           </div>
@@ -39,7 +39,7 @@
             <label class="form-label">Confirmar senha <span class="required">*</span></label>
             <div class="form-input-icon">
               <input type="password" id="reg-confirm" class="form-input" placeholder="Repita a senha" autocomplete="new-password">
-              <button type="button" class="icon-right" onclick="togglePassword('reg-confirm')">👁️</button>
+              <button type="button" class="icon-right" data-password-toggle="reg-confirm"></button>
             </div>
             <p class="form-error" id="err-confirm" style="display:none"></p>
           </div>
@@ -61,12 +61,9 @@
     </div>
   </div>
   <script src="/js/services/api.js"></script>
+  <script src="/js/icons.js"></script>
   <script src="/js/auth.js"></script>
   <script>
-    function togglePassword(id) {
-      const input = document.getElementById(id);
-      input.type = input.type === 'password' ? 'text' : 'password';
-    }
     function formatPhone(val) {
       const d = val.replace(/\D/g, '').slice(0, 11);
       if (d.length <= 2) return '(' + d;

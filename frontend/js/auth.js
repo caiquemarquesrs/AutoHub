@@ -62,54 +62,60 @@ function buildNavbar() {
 
   if (user && user.role === 'admin') {
     const links = [
-      { href: '/pages/admin/dashboard.html', label: 'Dashboard', icon: '' },
-      { href: '/pages/admin/orders.html', label: 'Pedidos', icon: '' },
-      { href: '/pages/admin/parts-list.html', label: 'Peças', icon: '' },
+      { href: '/pages/admin/dashboard.html', label: 'Dashboard', icon: 'layoutDashboard' },
+      { href: '/pages/admin/orders.html', label: 'Pedidos', icon: 'package' },
+      { href: '/pages/admin/parts-list.html', label: 'Peças', icon: 'wrench' },
     ];
     navItems = links.map(l => {
       const active = pathname.includes(l.href.split('/').pop().replace('.html', '')) ? 'active' : '';
-      return `<a href="${l.href}" class="${active}">${l.label}</a>`;
+      return `<a href="${l.href}" class="${active}"><span class="navbar-nav-icon">${icon(l.icon, 16)}</span>${l.label}</a>`;
     }).join('');
     actions = `
-      <div class="navbar-admin-badge">Admin</div>
+      <div class="navbar-admin-badge"><span class="navbar-admin-badge-icon">${icon('shieldCheck', 14)}</span>Admin</div>
       <div class="navbar-user-pill">
         <div class="navbar-user-avatar" style="background:var(--color-primary)">${user.name.charAt(0).toUpperCase()}</div>
         <span class="navbar-user-name">${user.name}</span>
       </div>
-      <button class="navbar-logout" onclick="handleLogout()">Sair</button>
+      <button type="button" class="navbar-logout" onclick="handleLogout()"><span class="navbar-logout-icon">${icon('logOut', 16)}</span><span class="navbar-logout-text">Sair</span></button>
     `;
   } else if (user && user.role === 'user') {
     const links = [
-      { href: '/', label: 'Catálogo', exact: true },
-      { href: '/pages/orders.html', label: 'Meus Pedidos', exact: false },
+      { href: '/', label: 'Catálogo', exact: true, icon: 'layoutGrid' },
+      { href: '/pages/orders.html', label: 'Meus Pedidos', exact: false, icon: 'package' },
     ];
     navItems = links.map(l => {
       const active = l.exact ? pathname === '/' || pathname === '/index.html' : pathname.includes(l.href.split('/').pop().replace('.html', ''));
-      return `<a href="${l.href}" class="${active ? 'active' : ''}">${l.label}</a>`;
+      return `<a href="${l.href}" class="${active ? 'active' : ''}"><span class="navbar-nav-icon">${icon(l.icon, 16)}</span>${l.label}</a>`;
     }).join('');
 
     const cartCount = getCartCount();
     actions = `
-      <a href="/pages/cart.html" class="navbar-cart">
-        🛒
+      <a href="/pages/cart.html" class="navbar-cart" aria-label="Carrinho">
+        ${icon('shoppingCart', 20)}
         ${cartCount > 0 ? `<span class="navbar-cart-badge">${cartCount > 9 ? '9+' : cartCount}</span>` : ''}
       </a>
       <div class="navbar-user-pill">
         <div class="navbar-user-avatar" style="background:var(--color-secondary)">${user.name.charAt(0).toUpperCase()}</div>
         <span class="navbar-user-name">${user.name}</span>
       </div>
-      <button class="navbar-logout" onclick="handleLogout()">Sair</button>
+      <button type="button" class="navbar-logout" onclick="handleLogout()"><span class="navbar-logout-icon">${icon('logOut', 16)}</span><span class="navbar-logout-text">Sair</span></button>
     `;
   } else {
-    navItems = `<a href="/" class="${pathname === '/' || pathname === '/index.html' ? 'active' : ''}">Catálogo</a>`;
+    navItems = `<a href="/" class="${pathname === '/' || pathname === '/index.html' ? 'active' : ''}"><span class="navbar-nav-icon">${icon('layoutGrid', 16)}</span>Catálogo</a>`;
     actions = `
       <a href="/pages/login.html" class="btn-login-nav">Entrar</a>
       <a href="/pages/register.html" class="btn-register-nav">Criar conta</a>
     `;
   }
 
+  const role = user?.role || 'guest';
+  const mobileCart =
+    user && user.role === 'user'
+      ? `<a href="/pages/cart.html" class="navbar-mobile-cart">${icon('shoppingCart', 20)}<span>Carrinho</span>${getCartCount() > 0 ? `<span class="navbar-mobile-cart-badge">${getCartCount() > 9 ? '9+' : getCartCount()}</span>` : ''}</a>`
+      : '';
+
   nav.innerHTML = `
-    <div class="navbar-inner">
+    <div class="navbar-inner" data-user-role="${role}">
       <a href="${user?.role === 'admin' ? '/pages/admin/dashboard.html' : '/'}" class="navbar-logo">
         <div class="navbar-logo-icon">AH</div>
         <span class="navbar-logo-text">AutoHub</span>
@@ -121,8 +127,9 @@ function buildNavbar() {
     </div>
     <div id="mobile-menu" class="navbar-mobile-menu hidden">
       ${navItems}
+      ${mobileCart}
       ${user ? `<hr style="border:none;border-top:1px solid var(--color-border-light);margin:8px 0">
-        <button onclick="handleLogout()" style="color:var(--color-primary)">Sair</button>` :
+        <button type="button" class="navbar-mobile-logout" onclick="handleLogout()">${icon('logOut', 18)} Sair</button>` :
         `<a href="/pages/login.html" class="btn btn-outline btn-full mt-2">Entrar</a>
          <a href="/pages/register.html" class="btn btn-primary btn-full mt-2">Criar conta</a>`}
     </div>

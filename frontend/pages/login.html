@@ -9,7 +9,7 @@
 <body>
   <div class="auth-page">
     <div class="auth-wrapper">
-      <a href="/" class="auth-back">&#8592; Voltar ao catálogo</a>
+      <a href="/" class="auth-back auth-back-with-icon"><span data-ui-icon="arrowLeft" data-ui-size="16"></span> Voltar ao catálogo</a>
       <div class="auth-card">
         <div class="auth-header">
           <div class="auth-logo auth-logo-primary">AH</div>
@@ -26,7 +26,7 @@
             <label class="form-label">Senha</label>
             <div class="form-input-icon">
               <input type="password" id="password" class="form-input" placeholder="••••••••" autocomplete="current-password">
-              <button type="button" class="icon-right" onclick="togglePassword('password', this)">👁️</button>
+              <button type="button" class="icon-right" data-password-toggle="password"></button>
             </div>
           </div>
           <button type="submit" id="login-btn" class="btn btn-primary btn-full" style="margin-top:8px">Entrar</button>
@@ -41,12 +41,9 @@
     </div>
   </div>
   <script src="/js/services/api.js"></script>
+  <script src="/js/icons.js"></script>
   <script src="/js/auth.js"></script>
   <script>
-    function togglePassword(id, btn) {
-      const input = document.getElementById(id);
-      input.type = input.type === 'password' ? 'text' : 'password';
-    }
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const errorDiv = document.getElementById('login-error');

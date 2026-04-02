@@ -13,6 +13,7 @@ async function loadOrder() {
   } catch {
     document.getElementById('content').innerHTML = `
       <div class="empty-state">
+        <div class="order-not-found-icon">${icon('package', 32)}</div>
         <h2 style="font-size:20px;font-weight:700;margin-bottom:8px">Pedido não encontrado</h2>
         <p class="text-muted mb-4">O pedido #${orderId} não existe no sistema.</p>
         <a href="/pages/admin/orders.html" class="btn btn-primary">Voltar para Pedidos</a>
@@ -28,16 +29,16 @@ function renderOrder() {
   const order = currentOrder;
   const content = document.getElementById('content');
   const statusSteps = [
-    { status: 'Processando', icon: '1', label: 'Processar' },
-    { status: 'Enviado', icon: '2', label: 'Enviar' },
-    { status: 'Entregue', icon: '3', label: 'Entregar' },
+    { status: 'Processando', iconName: 'clock', label: 'Processar' },
+    { status: 'Enviado', iconName: 'truck', label: 'Enviar' },
+    { status: 'Entregue', iconName: 'checkCircle2', label: 'Entregar' },
   ];
   const currentIdx = statusSteps.findIndex(s => s.status === order.status);
   const statusBtnColors = { Enviado: 'background:#3b82f6;color:#fff', Entregue: 'background:#22c55e;color:#fff' };
   const activeColors = { Processando: 'background:#fffbeb;color:#b45309;border:2px solid #fde68a', Enviado: 'background:#eff6ff;color:#1d4ed8;border:2px solid #bfdbfe', Entregue: 'background:#f0fdf4;color:#15803d;border:2px solid #bbf7d0' };
 
   content.innerHTML = `
-    <a href="/pages/admin/orders.html" class="auth-back" style="margin-bottom:24px">&#8592; Pedidos</a>
+    <a href="/pages/admin/orders.html" class="auth-back auth-back-with-icon" style="margin-bottom:24px">${icon('arrowLeft', 16)} Pedidos</a>
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px">
       <div>
         <h1 class="page-title">Detalhes do Pedido</h1>
@@ -89,7 +90,8 @@ function renderOrder() {
               else if (isNext) { style = statusBtnColors[step.status] || ''; disabled = ''; }
               else if (isPast) { style = 'background:var(--color-bg-alt);color:var(--color-text-placeholder);cursor:not-allowed'; disabled = 'disabled'; }
               const label = isActive ? `${step.status} (atual)` : isPast ? `${step.status} ✓` : `Marcar como ${step.status}`;
-              return `<button ${disabled} onclick="advanceStatus('${step.status}')" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:600;transition:all 0.2s;${style}">${step.icon} <span style="flex:1;text-align:left">${label}</span>${isNext?'Prox.':''}</button>`;
+              const nextChevron = isNext ? `<span class="order-status-btn-icon" style="color:inherit">${icon('chevronRight', 16)}</span>` : '';
+              return `<button type="button" ${disabled} onclick="advanceStatus('${step.status}')" style="width:100%;display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--radius-md);font-size:14px;font-weight:600;transition:all 0.2s;${style}"><span class="order-status-btn-icon">${icon(step.iconName, 16)}</span><span style="flex:1;text-align:left">${label}</span>${nextChevron}</button>`;
             }).join('')}
           </div>
         </div>
@@ -100,7 +102,7 @@ function renderOrder() {
             const colors = { Processando: { bg: '#fffbeb', c: '#f59e0b' }, Enviado: { bg: '#eff6ff', c: '#3b82f6' }, Entregue: { bg: '#f0fdf4', c: '#22c55e' } };
             const col = isDone ? colors[step.status] : { bg: 'var(--color-input-bg)', c: 'var(--color-text-placeholder)' };
             return `<div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
-              <div style="width:28px;height:28px;border-radius:50%;background:${col.bg};color:${col.c};display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0">${step.icon}</div>
+              <div style="width:28px;height:28px;border-radius:50%;background:${col.bg};color:${col.c};display:flex;align-items:center;justify-content:center;flex-shrink:0">${icon(step.iconName, 14)}</div>
               <div style="flex:1"><p class="text-sm font-semibold" style="color:${isDone?'var(--color-text)':'var(--color-text-placeholder)'}">${step.status}</p>${isDone?`<p class="text-xs text-muted">${formatDate(order.created_at)}</p>`:''}</div>
               ${isDone && order.status === step.status ? '<span style="width:8px;height:8px;border-radius:50%;background:var(--color-primary)"></span>' : ''}
             </div>`;

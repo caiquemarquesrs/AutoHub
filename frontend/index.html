@@ -15,12 +15,10 @@
     </div>
     <div class="filter-bar">
       <div class="filter-search">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon" data-ui-icon="search" data-ui-size="16"></span>
         <input type="text" id="search-input" placeholder="Buscar peça...">
       </div>
-      <div class="filter-chips" id="category-filters">
-        <span style="font-size:12px;color:var(--color-text-muted);padding:0 6px">🏷️</span>
-      </div>
+      <div class="filter-chips" id="category-filters"></div>
     </div>
     <div id="loading" class="empty-state"><div class="spinner spinner-dark"></div></div>
     <div id="products-grid" class="grid grid-5" style="display:none"></div>
@@ -32,6 +30,7 @@
     <p id="count-text" class="text-sm text-muted mt-4"></p>
   </main>
   <script src="/js/services/api.js"></script>
+  <script src="/js/icons.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/catalog.js"></script>
 </body>

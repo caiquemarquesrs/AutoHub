@@ -21,7 +21,7 @@ async function loadCatalog() {
 function renderCategoryFilters() {
   const container = document.getElementById('category-filters');
   const allCats = ['Todos', ...categories.map(c => c.name)];
-  container.innerHTML = `<span style="font-size:12px;color:var(--color-text-muted);padding:0 6px">🏷️</span>` + allCats.map(cat =>
+  container.innerHTML = `<span class="filter-tag-lead">${icon('tag', 16)}</span>` + allCats.map(cat =>
     `<button class="filter-chip ${cat === activeCategory ? 'active' : ''}" onclick="setCategory('${cat}')">${cat}</button>`
   ).join('');
 }
@@ -71,7 +71,7 @@ function renderProducts() {
           <p class="product-card-desc">${part.description || ''}</p>
           <p class="product-card-price">${formatCurrency(part.price)}</p>
           <button class="product-card-btn ${justAdded ? 'added' : ''}" onclick="event.stopPropagation(); handleAddToCart(${part.id})">
-            ${justAdded ? 'Adicionado' : 'Adicionar'}
+            ${justAdded ? `${icon('check', 14)} Adicionado` : `${icon('shoppingCart', 14)} Adicionar`}
           </button>
         </div>
       </div>`;

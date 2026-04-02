@@ -18,10 +18,10 @@ function renderDashboard(data) {
   const now = new Date().toLocaleDateString('pt-BR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
   const stats = [
-    { title: 'Total de Pedidos', value: totalOrders, bg: '#FEF2F3', color: '#E63946', icon: '' },
-    { title: 'Processando', value: data.processingOrders, bg: '#fffbeb', color: '#f59e0b', icon: '' },
-    { title: 'Enviados', value: data.shippedOrders, bg: '#eff6ff', color: '#3b82f6', icon: '' },
-    { title: 'Entregues', value: data.deliveredOrders, bg: '#f0fdf4', color: '#22c55e', icon: '' },
+    { title: 'Total de Pedidos', value: totalOrders, bg: '#FEF2F3', color: '#E63946', iconName: 'package' },
+    { title: 'Processando', value: data.processingOrders, bg: '#fffbeb', color: '#f59e0b', iconName: 'clock' },
+    { title: 'Enviados', value: data.shippedOrders, bg: '#eff6ff', color: '#3b82f6', iconName: 'truck' },
+    { title: 'Entregues', value: data.deliveredOrders, bg: '#f0fdf4', color: '#22c55e', iconName: 'checkCircle2' },
   ];
 
   const bars = [
@@ -38,6 +38,7 @@ function renderDashboard(data) {
     <div class="grid grid-4 mb-6">
       ${stats.map(s => `
         <div class="stat-card">
+          <div class="stat-card-icon" style="background:${s.bg};color:${s.color}">${icon(s.iconName, 20)}</div>
           <p class="stat-card-label">${s.title}</p>
           <p class="stat-card-value">${s.value}</p>
         </div>

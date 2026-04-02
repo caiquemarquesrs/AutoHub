@@ -18,12 +18,10 @@
     </div>
     <div class="filter-bar">
       <div class="filter-search">
-        <span class="search-icon">🔍</span>
+        <span class="search-icon" data-ui-icon="search" data-ui-size="16"></span>
         <input type="text" id="search-input" placeholder="Buscar por nome ou código...">
       </div>
-      <div class="filter-chips" id="category-filters">
-        <span style="font-size:12px;color:var(--color-text-muted);padding:0 6px">🏷️</span>
-      </div>
+      <div class="filter-chips" id="category-filters"></div>
     </div>
     <div id="loading" class="empty-state"><div class="spinner spinner-dark"></div></div>
     <div id="table-card" class="card" style="overflow:hidden;display:none">
@@ -38,6 +36,7 @@
   </main>
   <div id="delete-modal" style="display:none"></div>
   <script src="/js/services/api.js"></script>
+  <script src="/js/icons.js"></script>
   <script src="/js/auth.js"></script>
   <script src="/js/admin/parts-list.js"></script>
 </body>

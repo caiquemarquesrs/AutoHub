@@ -11,6 +11,7 @@ async function loadOrder() {
   } catch {
     document.getElementById('content').innerHTML = `
       <div class="empty-state">
+        <div class="order-not-found-icon">${icon('package', 32)}</div>
         <h2 style="font-size:20px;font-weight:700;margin-bottom:8px">Pedido não encontrado</h2>
         <p class="text-muted mb-4">O pedido #${orderId} não existe.</p>
         <a href="/pages/orders.html" class="btn btn-secondary">Voltar</a>
@@ -31,10 +32,10 @@ function renderOrder(order) {
     { label: 'Entregue', done: order.status === 'Entregue' },
   ];
   const currentIdx = steps.findIndex(s => s.label === order.status);
-  const stepIcons = ['1', '2', '3'];
+  const stepIconNames = ['clock', 'truck', 'checkCircle2'];
 
   content.innerHTML = `
-    <a href="/pages/orders.html" class="auth-back" style="margin-bottom:24px">&#8592; Meus Pedidos</a>
+    <a href="/pages/orders.html" class="auth-back auth-back-with-icon" style="margin-bottom:24px">${icon('arrowLeft', 16)} Meus Pedidos</a>
     <div class="card" style="overflow:hidden;margin-bottom:16px">
       <div style="height:6px;background:${statusColors[order.status]}"></div>
       <div style="padding:24px">
@@ -56,7 +57,7 @@ function renderOrder(order) {
           const iconClass = step.done ? (isActive ? `active-${step.label.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}` : 'done') : 'pending';
           return `
             <div class="tracker-step">
-              <div class="tracker-icon ${iconClass}">${stepIcons[idx]}</div>
+              <div class="tracker-icon ${iconClass}">${icon(stepIconNames[idx], 18)}</div>
               <span class="tracker-label ${step.done ? 'done' : 'pending'}">${step.label}</span>
             </div>
             ${idx < steps.length - 1 ? `<div class="tracker-line ${steps[idx+1].done ? 'done' : 'pending'}"></div>` : ''}
